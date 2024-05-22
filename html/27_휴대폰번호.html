@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>휴대폰번호</title>
+    <style>
+        .check {
+            color: green;
+        }
+        .error {
+            color:  red;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        -휴대폰 번호 11글자
+    -->
+    <h2>휴대폰</h2>
+    <form action="#" name="signupForm">
+        <h3>번호</h3>
+        <input type="text" class="signup-input" id="inputNumber" name="user_name">
+        <br>
+        <span class="input-result">번호 11글자</span>
+    </form>
+    <script>
+        const checkList = {
+            "inputNumber": true
+        }
+        const inputNumber = document.querySelector("#inputNumber");
+
+        inputNumber.addEventListener("input", e => {
+            const value = e.target.value;
+            const span = e.target.nextElementSibling.nextElementSibling;
+        
+            if (value.trim().length == 11) {
+                span.textContent = "번호 11글자";
+                span.classList.remove("check", "error");
+                checkList["inputNumber"] = false;
+                return;
+            }
+            const phoneRegex = /^\d{3}-\d{3,4}-\d{4}$/;
+
+            // If the phone number is in the correct format
+            if (phoneRegex.test(value)) {
+                span.textContent = "유효한 이름의 형식입니다.";
+                span.classList.add("check");
+                span.classList.remove("error");
+                checkList["inputNumber"] = true;
+            } else {
+                span.textContent = "유효하지 않은 이름의 형식입니다.";
+                span.classList.add("error");
+                span.classList.remove("check");
+                checkList["inputNumber"] = false;
+            }
+        })
+    </script>
+</body>
+</html>
